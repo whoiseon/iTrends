@@ -1,29 +1,14 @@
 import { Link } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, YStack } from 'tamagui';
 
 export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        <Link href="/(tabs)/news">news</Link>
-      </Text>
-    </View>
+    <YStack flex={1} justifyContent="center" alignItems="center" space="$2">
+      <Link href="/(tabs)/news">
+        <Text fontSize="$11" fontFamily="$body">
+          iTrends
+        </Text>
+      </Link>
+    </YStack>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
