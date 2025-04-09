@@ -27,6 +27,20 @@ out/
 build
 dist
 
+# code gen
+.tamagui
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Debug
 npm-debug.log*
@@ -36,3 +50,24 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Expo
+.expo/
+dist/
+web-build/
+ios
+android
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# typescript
+*.tsbuildinfo
