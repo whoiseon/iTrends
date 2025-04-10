@@ -27,9 +27,6 @@ out/
 build
 dist
 
-# code gen
-.tamagui
-
 # debug
 npm-debug.log*
 yarn-debug.log*
