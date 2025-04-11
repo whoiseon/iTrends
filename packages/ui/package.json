@@ -2,26 +2,33 @@
   "name": "@itrends/ui",
   "version": "0.0.0",
   "private": true,
-  "exports": {
-    "./*": "./src/*.tsx"
-  },
+  "type": "module",
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.27.0",
     "@itrends/eslint-config": "*",
     "@itrends/typescript-config": "*",
     "@turbo/gen": "^2.5.0",
     "@types/node": "^22.14.0",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
+    "@types/react": "~18.3.12",
+    "@types/react-dom": "~18.3.1",
     "eslint": "^9.24.0",
+    "metro-react-native-babel-preset": "^0.77.0",
     "typescript": "5.8.2"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "nativewind": "^4.1.23",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-native": "^0.79.0",
+    "react-native-web": "^0.20.0",
+    "solito": "^4.4.1",
+    "tailwindcss": "^3.4.17"
   }
 }

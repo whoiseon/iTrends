@@ -1,5 +1,5 @@
 import { AuthTemplate } from '@itrends/ui';
 
-export default function AuthScreen() {
+export default function Home() {
   return <AuthTemplate />;
 }

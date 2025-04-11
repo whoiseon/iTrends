@@ -77,4 +77,19 @@ export const config = [
       'android/**/*',
     ],
   },
+  {
+    files: [
+      '**/*.config.js',
+      '**/tailwind.config.js',
+      '**/tailwind.config.cjs',
+    ],
+    languageOptions: {
+      globals: {
+        module: true,
+        require: true,
+        process: true,
+        __dirname: true,
+      },
+    },
+  },
 ];
