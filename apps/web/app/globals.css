@@ -9,9 +9,3 @@ html {
   min-height: 100%;
   -webkit-text-size-adjust: 100%; /* 2 */
 }
-
-body {
-  display: flex;
-  flex: 1;
-  margin: 0;
-}

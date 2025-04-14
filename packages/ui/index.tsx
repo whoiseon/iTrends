@@ -9,3 +9,6 @@ export * from './src/system/view';
 
 // template
 export * from './src/template/auth';
+
+// utils
+export * from './src/utils';

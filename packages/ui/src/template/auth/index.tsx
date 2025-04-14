@@ -1,6 +1,7 @@
 'use client';
 
-import { Button } from '../../system/button';
+import { MotiLink as Link } from 'solito/moti/app';
+
 import { Text } from '../../system/text';
 import { View } from '../../system/view';
 import { cn, platformStyle } from '../../utils';
@@ -34,12 +35,16 @@ export function AuthTemplate() {
         </View>
       </View>
       <View className="flex-col gap-y-1.5 px-4 w-full web:py-4 ios:py-12 android:py-4">
-        <Button className={cn(BUTTON_STYLE, 'bg-blue-500')}>
-          <Text className={BUTTON_TEXT_STYLE}>시작하기</Text>
-        </Button>
-        <Button className={cn(BUTTON_STYLE, 'bg-stone-900')}>
-          <Text className={BUTTON_TEXT_STYLE}>간편 회원가입</Text>
-        </Button>
+        <Link href="/news">
+          <View className={cn(BUTTON_STYLE, 'bg-blue-500')}>
+            <Text className={BUTTON_TEXT_STYLE}>이메일로 시작하기</Text>
+          </View>
+        </Link>
+        <Link href="/news">
+          <View className={cn(BUTTON_STYLE, 'bg-stone-900')}>
+            <Text className={BUTTON_TEXT_STYLE}>간편 회원가입</Text>
+          </View>
+        </Link>
       </View>
     </View>
   );

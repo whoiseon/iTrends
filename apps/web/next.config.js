@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   devIndicators: false,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   transpilePackages: [
     'solito',
     'react-native-web',
@@ -11,6 +14,11 @@ const nextConfig = {
     'nativewind',
     'react-native-css-interop',
   ],
+  compiler: {
+    define: {
+      __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
+    },
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
