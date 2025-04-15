@@ -21,7 +21,6 @@ export const config = [
     },
     rules: {
       'turbo/no-undeclared-env-vars': 'warn',
-      '@next/next/no-html-link-for-pages': 'off',
     },
   },
   {
@@ -40,7 +39,7 @@ export const config = [
       'import/no-duplicates': 'error',
       'import/no-empty-named-blocks': 'error',
       'import/no-import-module-exports': 'error',
-      'import/no-namespace': 'error',
+      'import/no-namespace': 'off',
       'import/no-relative-packages': 'error',
       'import/no-useless-path-segments': 'error',
       'import/order': [

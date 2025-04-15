@@ -43,3 +43,10 @@ export function platformStyle({
 
   return style;
 }
+
+/**
+ * check function type
+ */
+export function isFunction(value: unknown): value is (...args: any[]) => any {
+  return typeof value === 'function';
+}
