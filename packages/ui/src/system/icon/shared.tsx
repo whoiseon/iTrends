@@ -11,6 +11,7 @@ export type IconProps = {
   name: IconName;
   size?: number;
   color?: string;
+  stroke?: string;
   strokeWidth?: number;
   className?: string;
 };

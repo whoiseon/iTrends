@@ -1,13 +1,21 @@
 'use client';
 
+import { useColorScheme } from 'nativewind';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 
 import { HEADER_ICON_SIZE } from '../../config/constant';
 import { Button, Text, View } from '../../system';
-import { Icon } from '../../system/icon';
 import { cn, isFunction } from '../../utils';
 
 import { AppHeaderProps, HeaderBackButtonProps } from './shared';
+
+const Icon = dynamic(
+  async () => import('../../system/icon').then((mod) => mod.Icon),
+  {
+    ssr: false,
+  },
+);
 
 const styles = {
   floatingCenterTitle: 'absolute left-0 right-0 text-center z-[-1]',
@@ -22,7 +30,7 @@ export function AppHeader({ title, headerRight, headerLeft }: AppHeaderProps) {
   return (
     <View
       testID="appHeader"
-      className="flex flex-row sticky top-0 left-0 z-[1] right-0 bg-white dark:bg-stone-900 h-[56px] items-center px-4 gap-4 border-b-[1px] border-stone-200 dark:border-stone-700"
+      className="flex flex-row sticky top-0 left-0 z-[1] right-0 bg-white dark:bg-stone-900 h-[56px] items-center px-4 gap-4 border-b-[1px] border-stone-200 dark:border-stone-800"
     >
       {headerLeft?.({
         className: styles.headerButton,
@@ -44,6 +52,7 @@ export function AppHeader({ title, headerRight, headerLeft }: AppHeaderProps) {
 }
 
 export function HeaderBackButton({ fallbackUrl }: HeaderBackButtonProps) {
+  const { colorScheme } = useColorScheme();
   const { back, push } = useRouter();
 
   const handleGoBack = () => {
@@ -59,7 +68,11 @@ export function HeaderBackButton({ fallbackUrl }: HeaderBackButtonProps) {
 
   return (
     <Button onPress={handleGoBack}>
-      <Icon name="ChevronLeft" size={HEADER_ICON_SIZE} />
+      <Icon
+        name="ChevronLeft"
+        size={HEADER_ICON_SIZE}
+        color={colorScheme === 'dark' ? 'white' : 'black'}
+      />
     </Button>
   );
 }

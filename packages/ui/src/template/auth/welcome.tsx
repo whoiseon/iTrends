@@ -34,7 +34,7 @@ export function AuthTemplate() {
         </View>
       </View>
       <View className="flex-col gap-y-1.5 px-4 w-full web:py-4 ios:py-12 android:py-4">
-        <Link href="/news">
+        <Link href="/signin">
           <View className={cn(BUTTON_STYLE, 'bg-blue-500 dark:bg-blue-400')}>
             <Text className={cn(BUTTON_TEXT_STYLE, 'dark:text-stone-900')}>
               이메일로 시작하기

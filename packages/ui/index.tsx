@@ -15,7 +15,9 @@ export * from './src/system/text';
 export * from './src/system/view';
 
 // template
-export * from './src/template/auth/signup';
+export * from './src/template/auth/signin';
+export * from './src/template/auth/signup/index';
+export * from './src/template/auth/signup/shared';
 export * from './src/template/auth/welcome';
 
 // utils

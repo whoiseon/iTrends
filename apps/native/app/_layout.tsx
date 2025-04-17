@@ -11,8 +11,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
+
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import 'react-native-reanimated';
-import { useRouter } from 'solito/router';
 import '../global.css';
 
 export {
@@ -22,7 +23,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '',
+  initialRouteName: 'index',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -54,29 +55,41 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const router = useRouter();
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <View className="flex-1 bg-white dark:bg-stone-900">
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="signup"
-            options={{
-              headerShown: true,
-              headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
-              title: '회원가입',
-              headerStyle: {
-                backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
-              },
-            }}
-          />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        </Stack>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      </View>
+      <KeyboardProvider>
+        <View className="flex-1 bg-white dark:bg-stone-900">
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="signup"
+              options={{
+                headerShown: true,
+                headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
+                title: '회원가입',
+                headerStyle: {
+                  backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="signin"
+              options={{
+                headerShown: true,
+                headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
+                title: '로그인',
+                headerStyle: {
+                  backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
+                },
+              }}
+            />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+          </Stack>
+          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        </View>
+      </KeyboardProvider>
     </ThemeProvider>
   );
 }
