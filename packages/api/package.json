@@ -4,6 +4,8 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit"
@@ -16,5 +18,8 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.4.0",
     "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "orval": "^7.8.0"
   }
 }

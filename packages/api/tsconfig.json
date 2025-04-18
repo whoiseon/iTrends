@@ -1,5 +1,5 @@
 {
-  "extends": "@itrends/typescript-config/base.json",
+  "extends": "@itrends/typescript-config/api.json",
   "compilerOptions": {
     "strict": true,
     "types": ["next/types/global"]
