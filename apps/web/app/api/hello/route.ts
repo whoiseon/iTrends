@@ -7,7 +7,7 @@ import { HTTP_STATUS } from '../../../service/lib/httpStatus';
  *    get:
  *      tags:
  *        - test
- *      summary: greeting
+ *      summary: testing
  *      description: >
  *        iTrends API Version
  *      responses:
