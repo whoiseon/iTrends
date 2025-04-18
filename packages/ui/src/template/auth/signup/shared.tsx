@@ -156,6 +156,7 @@ export function SignUpFormInputs({
         error={errors.displayName?.message}
         autoFocus={true}
         onSubmitEditing={() => onNext(emailInputRef)}
+        testID="input-display-name"
       />
       <LabelInput
         label="이메일"
@@ -167,6 +168,7 @@ export function SignUpFormInputs({
         error={errors.email?.message}
         inputRef={emailInputRef}
         onSubmitEditing={() => onNext(passwordInputRef)}
+        testID="input-email"
       />
       <LabelInput
         label="비밀번호"
@@ -178,6 +180,7 @@ export function SignUpFormInputs({
         secureTextEntry={true}
         inputRef={passwordInputRef}
         onSubmitEditing={() => onNext(confirmPasswordInputRef)}
+        testID="input-password"
       />
       <LabelInput
         label="비밀번호 확인"
@@ -188,6 +191,7 @@ export function SignUpFormInputs({
         error={errors.confirmPassword?.message}
         secureTextEntry={true}
         inputRef={confirmPasswordInputRef}
+        testID="input-confirm-password"
       />
     </>
   );
@@ -259,6 +263,7 @@ export function SignUpFormForWeb() {
         <Button
           className={SIGN_UP_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
           onPress={handleSubmit(onPress)}
+          testID="signup-submit-button"
         >
           <Text className={SIGN_UP_CONSTANTS.SUBMIT_BUTTON_TEXT_CLASS_NAME}>
             {SIGN_UP_CONSTANTS.SUBMIT_BUTTON_TEXT}

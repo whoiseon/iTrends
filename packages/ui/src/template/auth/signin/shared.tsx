@@ -107,6 +107,7 @@ export function SignInFormInputs({
         error={errors.email?.message}
         inputRef={emailInputRef}
         onSubmitEditing={() => onNext(passwordInputRef)}
+        testID="input-email"
       />
       <LabelInput
         label="비밀번호"
@@ -116,6 +117,7 @@ export function SignInFormInputs({
         returnKeyType="done"
         error={errors.password?.message}
         inputRef={passwordInputRef}
+        testID="input-password"
       />
     </>
   );
@@ -146,6 +148,7 @@ export function SignInFormForNative() {
           <Button
             className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
             onPress={handleSubmit(onPress)}
+            testID="signin-submit-button"
           >
             <Text className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT_CLASS_NAME}>
               {SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT}
@@ -183,6 +186,7 @@ export function SignInFormForWeb() {
         <Button
           className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
           onPress={handleSubmit(onPress)}
+          testID="signin-submit-button"
         >
           <Text className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT_CLASS_NAME}>
             {SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT}

@@ -1,0 +1,9 @@
+{
+  "extends": "@itrends/typescript-config/base.json",
+  "compilerOptions": {
+    "strict": true,
+    "types": ["next/types/global"]
+  },
+  "exclude": ["build", "dist", "node_modules"],
+  "include": [".", "../../@types/**/*"]
+}

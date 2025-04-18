@@ -34,14 +34,14 @@ export function AuthTemplate() {
         </View>
       </View>
       <View className="flex-col gap-y-1.5 px-4 w-full web:py-4 ios:py-12 android:py-4">
-        <Link href="/signin">
+        <Link href="/signin" testID="signin-link-button">
           <View className={cn(BUTTON_STYLE, 'bg-blue-500 dark:bg-blue-400')}>
             <Text className={cn(BUTTON_TEXT_STYLE, 'dark:text-stone-900')}>
               이메일로 시작하기
             </Text>
           </View>
         </Link>
-        <Link href="/signup">
+        <Link href="/signup" testID="signup-link-button">
           <View className={cn(BUTTON_STYLE, 'bg-stone-900 dark:bg-stone-50')}>
             <Text className={cn(BUTTON_TEXT_STYLE, 'dark:text-stone-900')}>
               간편 회원가입

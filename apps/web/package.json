@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@itrends/ui": "*",
@@ -23,6 +24,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "~18.3.12",
     "@types/react-dom": "~18.3.1",
+    "cypress": "^14.3.1",
     "eslint": "^9.24.0",
     "tailwindcss": "^3.4.17",
     "typescript": "5.8.2"
