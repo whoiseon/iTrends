@@ -8,8 +8,8 @@ import { z } from 'zod';
 import { Button, Input, SafeAreaView, Text, View } from '../../../system';
 import { cn } from '../../../utils';
 
-const SIGN_UP_CONSTANTS = {
-  SUBMIT_BUTTON_TEXT: '가입하기',
+const SIGN_IN_CONSTANTS = {
+  SUBMIT_BUTTON_TEXT: '로그인',
   SUBMIT_BUTTON_CLASS_NAME:
     'w-full bg-blue-500 dark:bg-blue-400 h-[46px] rounded-lg items-center justify-center mt-5',
   SUBMIT_BUTTON_TEXT_CLASS_NAME: 'font-bold text-white dark:text-stone-900',
@@ -17,36 +17,22 @@ const SIGN_UP_CONSTANTS = {
   FORM_CONTAINER_CLASS_NAME: 'flex-1 gap-y-4 p-5',
 } as const;
 
-export const signUpSchema = z
-  .object({
-    email: z
-      .string()
-      .email({ message: '이메일 형식이 올바르지 않습니다.' })
-      .min(1),
-    password: z
-      .string()
-      .min(8, { message: '비밀번호는 최소 8자 이상이어야 합니다.' }),
-    confirmPassword: z
-      .string()
-      .min(1, { message: '비밀번호 확인을 입력해주세요.' }),
-    displayName: z
-      .string()
-      .min(2, { message: '닉네임은 최소 2자 이상이어야 합니다.' })
-      .regex(/^[가-힣a-zA-Z0-9]+$/, {
-        message: '닉네임은 한글, 영어, 숫자만 사용 가능합니다.',
-      }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ['confirmPassword'],
-    message: '비밀번호가 일치하지 않습니다.',
-  });
+export const signInSchema = z.object({
+  email: z
+    .string()
+    .email({ message: '이메일 형식이 올바르지 않습니다.' })
+    .min(1),
+  password: z
+    .string()
+    .min(8, { message: '비밀번호는 최소 8자 이상이어야 합니다.' }),
+});
 
-export type SignUpSchema = z.infer<typeof signUpSchema>;
+export type SignInSchema = z.infer<typeof signInSchema>;
 
 interface LabelInputProps extends TextInputProps {
   label: string;
-  name: 'email' | 'password' | 'confirmPassword' | 'displayName';
-  control: Control<SignUpSchema>;
+  name: 'email' | 'password';
+  control: Control<SignInSchema>;
   placeholder?: string;
   returnKeyType?: ReturnKeyType;
   error?: string;
@@ -94,69 +80,23 @@ function LabelInput({
   );
 }
 
-export function useSignUpForm() {
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<SignUpSchema>({
-    resolver: zodResolver(signUpSchema),
-  });
-
-  const onPress = (data: SignUpSchema) => {
-    console.log(data);
-  };
-
-  const emailInputRef = useRef<TextInput>(null);
-  const passwordInputRef = useRef<TextInput>(null);
-  const confirmPasswordInputRef = useRef<TextInput>(null);
-
-  const onNext = (ref: RefObject<TextInput>) => {
-    if (ref.current) {
-      ref.current.focus();
-    }
-  };
-
-  return {
-    handleSubmit,
-    control,
-    errors,
-    onPress,
-    emailInputRef,
-    passwordInputRef,
-    confirmPasswordInputRef,
-    onNext,
-  };
-}
-
-interface SignUpFormInputsProps {
-  control: Control<SignUpSchema>;
-  errors: FieldErrors<SignUpSchema>;
+interface SignInFormInputsProps {
+  control: Control<SignInSchema>;
+  errors: FieldErrors<SignInSchema>;
   onNext: (ref: RefObject<TextInput>) => void;
   emailInputRef: RefObject<TextInput>;
   passwordInputRef: RefObject<TextInput>;
-  confirmPasswordInputRef: RefObject<TextInput>;
 }
-export function SignUpFormInputs({
+
+export function SignInFormInputs({
   control,
   errors,
   onNext,
   emailInputRef,
   passwordInputRef,
-  confirmPasswordInputRef,
-}: SignUpFormInputsProps) {
+}: SignInFormInputsProps) {
   return (
     <>
-      <LabelInput
-        label="닉네임"
-        name="displayName"
-        control={control}
-        placeholder="닉네임을 입력해주세요"
-        returnKeyType="next"
-        error={errors.displayName?.message}
-        autoFocus={true}
-        onSubmitEditing={() => onNext(emailInputRef)}
-      />
       <LabelInput
         label="이메일"
         name="email"
@@ -173,56 +113,42 @@ export function SignUpFormInputs({
         name="password"
         control={control}
         placeholder="비밀번호를 입력해주세요"
-        returnKeyType="next"
-        error={errors.password?.message}
-        secureTextEntry={true}
-        inputRef={passwordInputRef}
-        onSubmitEditing={() => onNext(confirmPasswordInputRef)}
-      />
-      <LabelInput
-        label="비밀번호 확인"
-        name="confirmPassword"
-        control={control}
-        placeholder="비밀번호를 다시 입력해주세요"
         returnKeyType="done"
-        error={errors.confirmPassword?.message}
-        secureTextEntry={true}
-        inputRef={confirmPasswordInputRef}
+        error={errors.password?.message}
+        inputRef={passwordInputRef}
       />
     </>
   );
 }
 
-export function SignUpFormForNative() {
+export function SignInFormForNative() {
   const {
-    handleSubmit,
     control,
     errors,
-    onPress,
+    onNext,
     emailInputRef,
     passwordInputRef,
-    confirmPasswordInputRef,
-    onNext,
-  } = useSignUpForm();
+    onPress,
+    handleSubmit,
+  } = useSignInForm();
 
   return (
-    <SafeAreaView className={cn('flex-1', SIGN_UP_CONSTANTS.BACKGROUND_COLOR)}>
+    <SafeAreaView className={cn('flex-1', SIGN_IN_CONSTANTS.BACKGROUND_COLOR)}>
       <KeyboardAwareScrollView>
-        <View className={SIGN_UP_CONSTANTS.FORM_CONTAINER_CLASS_NAME}>
-          <SignUpFormInputs
+        <View className={SIGN_IN_CONSTANTS.FORM_CONTAINER_CLASS_NAME}>
+          <SignInFormInputs
             control={control}
             errors={errors}
             onNext={onNext}
             emailInputRef={emailInputRef}
             passwordInputRef={passwordInputRef}
-            confirmPasswordInputRef={confirmPasswordInputRef}
           />
           <Button
-            className={SIGN_UP_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
+            className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
             onPress={handleSubmit(onPress)}
           >
-            <Text className={SIGN_UP_CONSTANTS.SUBMIT_BUTTON_TEXT_CLASS_NAME}>
-              {SIGN_UP_CONSTANTS.SUBMIT_BUTTON_TEXT}
+            <Text className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT_CLASS_NAME}>
+              {SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT}
             </Text>
           </Button>
         </View>
@@ -231,40 +157,71 @@ export function SignUpFormForNative() {
   );
 }
 
-export function SignUpFormForWeb() {
+export function SignInFormForWeb() {
   const {
+    control,
+    errors,
+    onNext,
+    emailInputRef,
+    passwordInputRef,
+    onPress,
+    handleSubmit,
+  } = useSignInForm();
+
+  return (
+    <View className={cn('flex-1', SIGN_IN_CONSTANTS.BACKGROUND_COLOR)}>
+      <View className={SIGN_IN_CONSTANTS.FORM_CONTAINER_CLASS_NAME}>
+        <SignInFormInputs
+          control={control}
+          errors={errors}
+          onNext={onNext}
+          emailInputRef={emailInputRef}
+          passwordInputRef={passwordInputRef}
+        />
+      </View>
+      <View className="p-5">
+        <Button
+          className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
+          onPress={handleSubmit(onPress)}
+        >
+          <Text className={SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT_CLASS_NAME}>
+            {SIGN_IN_CONSTANTS.SUBMIT_BUTTON_TEXT}
+          </Text>
+        </Button>
+      </View>
+    </View>
+  );
+}
+
+export function useSignInForm() {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
+  });
+
+  const onPress = (data: SignInSchema) => {
+    console.log(data);
+  };
+
+  const emailInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
+
+  const onNext = (ref: RefObject<TextInput>) => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+  };
+
+  return {
     handleSubmit,
     control,
     errors,
     onPress,
     emailInputRef,
     passwordInputRef,
-    confirmPasswordInputRef,
     onNext,
-  } = useSignUpForm();
-
-  return (
-    <View className={cn('flex-1', SIGN_UP_CONSTANTS.BACKGROUND_COLOR)}>
-      <View className={SIGN_UP_CONSTANTS.FORM_CONTAINER_CLASS_NAME}>
-        <SignUpFormInputs
-          control={control}
-          errors={errors}
-          onNext={onNext}
-          emailInputRef={emailInputRef}
-          passwordInputRef={passwordInputRef}
-          confirmPasswordInputRef={confirmPasswordInputRef}
-        />
-      </View>
-      <View className="p-5">
-        <Button
-          className={SIGN_UP_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
-          onPress={handleSubmit(onPress)}
-        >
-          <Text className={SIGN_UP_CONSTANTS.SUBMIT_BUTTON_TEXT_CLASS_NAME}>
-            {SIGN_UP_CONSTANTS.SUBMIT_BUTTON_TEXT}
-          </Text>
-        </Button>
-      </View>
-    </View>
-  );
+  };
 }

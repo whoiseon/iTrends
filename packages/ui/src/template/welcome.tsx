@@ -1,7 +1,7 @@
 'use client';
 
-import { Link, Text, View } from '../../system';
-import { cn, platformStyle } from '../../utils';
+import { Link, Text, View } from '../system';
+import { cn, platformStyle } from '../utils';
 
 const BUTTON_STYLE =
   'w-full flex items-center justify-center h-[46px] rounded-md';

@@ -1,6 +1,6 @@
 import { SignUpTemplate } from '@itrends/ui';
 
-import ClientBoundary from '../../clientBoundary';
+import ClientBoundary from './clientBoundary';
 
 export default function Page() {
   return (

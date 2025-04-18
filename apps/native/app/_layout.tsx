@@ -71,6 +71,7 @@ function RootLayoutNav() {
                 headerStyle: {
                   backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
                 },
+                headerTitleAlign: 'center',
               }}
             />
             <Stack.Screen
@@ -82,6 +83,7 @@ function RootLayoutNav() {
                 headerStyle: {
                   backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
                 },
+                headerTitleAlign: 'center',
               }}
             />
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

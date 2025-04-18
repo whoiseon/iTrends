@@ -15,10 +15,11 @@ export * from './src/system/text';
 export * from './src/system/view';
 
 // template
-export * from './src/template/auth/signin';
+export * from './src/template/auth/signin/index';
+export * from './src/template/auth/signin/shared';
 export * from './src/template/auth/signup/index';
 export * from './src/template/auth/signup/shared';
-export * from './src/template/auth/welcome';
+export * from './src/template/welcome';
 
 // utils
 export * from './src/utils';
