@@ -5,6 +5,7 @@
     "paths": {
       "@/*": ["./*"]
     },
+    "types": ["jest", "detox", "node"],
     "skipLibCheck": true
   },
   "include": [
