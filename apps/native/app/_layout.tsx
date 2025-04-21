@@ -1,10 +1,12 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { queryClient } from '@itrends/ui';
 import { HeaderBackButton, View } from '@itrends/ui';
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from '@react-navigation/native';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -15,7 +17,6 @@ import { useColorScheme } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import 'react-native-reanimated';
 import '../global.css';
-
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -57,41 +58,45 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <KeyboardProvider>
-        <View className="flex-1 bg-white dark:bg-stone-900">
-          <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="signup"
-              options={{
-                headerShown: true,
-                headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
-                title: '회원가입',
-                headerStyle: {
-                  backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
-                },
-                headerTitleAlign: 'center',
-              }}
-            />
-            <Stack.Screen
-              name="signin"
-              options={{
-                headerShown: true,
-                headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
-                title: '로그인',
-                headerStyle: {
-                  backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
-                },
-                headerTitleAlign: 'center',
-              }}
-            />
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          </Stack>
-          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-        </View>
-      </KeyboardProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <KeyboardProvider>
+          <View className="flex-1 bg-white dark:bg-stone-900">
+            <Stack>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen
+                name="signup"
+                options={{
+                  headerShown: true,
+                  headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
+                  title: '회원가입',
+                  headerStyle: {
+                    backgroundColor:
+                      colorScheme === 'dark' ? '#1c1917' : '#fff',
+                  },
+                  headerTitleAlign: 'center',
+                }}
+              />
+              <Stack.Screen
+                name="signin"
+                options={{
+                  headerShown: true,
+                  headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
+                  title: '로그인',
+                  headerStyle: {
+                    backgroundColor:
+                      colorScheme === 'dark' ? '#1c1917' : '#fff',
+                  },
+                  headerTitleAlign: 'center',
+                }}
+              />
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            </Stack>
+            <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+          </View>
+        </KeyboardProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

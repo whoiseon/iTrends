@@ -74,7 +74,11 @@ export const config = [
       'package.json',
       'ios/**/*',
       'android/**/*',
+      '__generated__/**/*',
     ],
+    rules: {
+      '@typescript-eslint/ban-ts-comment': 'off',
+    },
   },
   {
     files: [

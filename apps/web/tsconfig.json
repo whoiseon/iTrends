@@ -6,7 +6,15 @@
         "name": "next"
       }
     ],
-    "jsxImportSource": "nativewind"
+    "jsxImportSource": "nativewind",
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "incremental": true,
+    "resolveJsonModule": true
   },
   "include": [
     "**/*.ts",
@@ -16,5 +24,7 @@
     ".next/types/**/*.ts",
     "../../@types/**/*"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

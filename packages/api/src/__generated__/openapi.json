@@ -1,0 +1,87 @@
+{
+  "info": {
+    "description": "[openapi.json](/api/swagger)",
+    "title": "iTrends API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "Sign up",
+        "description": "Sign up for a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "The email address of the user",
+                    "example": "test@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "The password of the user",
+                    "example": "password"
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "description": "The display name of the user",
+                    "example": "John Doe"
+                  }
+                },
+                "required": [
+                  "email",
+                  "password",
+                  "displayName"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "description": "The status code of the response",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "The message from the server",
+                      "example": ""
+                    },
+                    "payload": {
+                      "type": "object",
+                      "properties": {
+                        "registered": {
+                          "type": "boolean",
+                          "description": "Whether the user was registered successfully",
+                          "example": true
+                        }
+                      },
+                      "required": [
+                        "statusCode",
+                        "message",
+                        "payload"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

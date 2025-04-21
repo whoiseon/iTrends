@@ -4,11 +4,17 @@
   "license": "MIT",
   "private": true,
   "type": "module",
-  "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "lint": "eslint . --fix",
+    "check-types": "tsc --noEmit",
+    "dev": "orval --config src/orvalConfig.ts && tsup src/index.ts --format cjs,esm --dts --watch",
+    "build": "orval --config src/orvalConfig.ts && tsup src/index.ts --format cjs,esm --dts --minify"
   },
   "devDependencies": {
     "@itrends/eslint-config": "*",
@@ -20,6 +26,8 @@
     "typescript": "5.8.2"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.74.4",
+    "axios": "^1.8.4",
     "orval": "^7.8.0"
   }
 }

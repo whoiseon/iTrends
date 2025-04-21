@@ -1,5 +1,8 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { RefObject, useRef } from 'react';
+import { usePostAuthSignup } from '@itrends/api';
+import { RefObject, useRef, useState } from 'react';
 import { Control, Controller, FieldErrors, useForm } from 'react-hook-form';
 import { ReturnKeyType, TextInput, TextInputProps } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
@@ -71,6 +74,7 @@ function LabelInput({
       <Controller
         control={control}
         name={name}
+        defaultValue=""
         render={({ field: { onChange, onBlur, value } }) => (
           <Input
             autoComplete="off"
@@ -80,7 +84,7 @@ function LabelInput({
             returnKeyType={returnKeyType}
             onChangeText={(value) => onChange(value)}
             onBlur={onBlur}
-            value={value}
+            value={value || ''}
             ref={inputRef}
             className="placeholder:text-stone-400 dark:placeholder:text-stone-600 h-[49px] text-stone-900 dark:text-stone-100 rounded-lg border border-stone-300 dark:border-stone-700 px-3 outline-none focus:border-blue-500 dark:focus:border-blue-400"
             {...props}
@@ -95,6 +99,8 @@ function LabelInput({
 }
 
 export function useSignUpForm() {
+  const [serverError, setServerError] = useState<string | null>(null);
+
   const {
     handleSubmit,
     control,
@@ -103,8 +109,30 @@ export function useSignUpForm() {
     resolver: zodResolver(signUpSchema),
   });
 
+  const { mutate } = usePostAuthSignup({
+    mutation: {
+      onSuccess: (data) => {
+        if (data.statusCode === 200) {
+          // signup success
+          control._reset();
+          return;
+        }
+      },
+      onError: (error: any) => {
+        const errorResponse = error.response.data;
+        setServerError(errorResponse.message || 'Unknown error');
+      },
+    },
+  });
+
   const onPress = (data: SignUpSchema) => {
-    console.log(data);
+    mutate({
+      data: {
+        email: data.email,
+        password: data.password,
+        displayName: data.displayName,
+      },
+    });
   };
 
   const emailInputRef = useRef<TextInput>(null);
@@ -126,6 +154,7 @@ export function useSignUpForm() {
     passwordInputRef,
     confirmPasswordInputRef,
     onNext,
+    serverError,
   };
 }
 
@@ -207,6 +236,7 @@ export function SignUpFormForNative() {
     passwordInputRef,
     confirmPasswordInputRef,
     onNext,
+    serverError,
   } = useSignUpForm();
 
   return (
@@ -221,6 +251,11 @@ export function SignUpFormForNative() {
             passwordInputRef={passwordInputRef}
             confirmPasswordInputRef={confirmPasswordInputRef}
           />
+          {serverError && (
+            <Text className="text-red-500 dark:text-red-400 text-base">
+              {serverError}
+            </Text>
+          )}
           <Button
             className={SIGN_UP_CONSTANTS.SUBMIT_BUTTON_CLASS_NAME}
             onPress={handleSubmit(onPress)}
@@ -245,6 +280,7 @@ export function SignUpFormForWeb() {
     passwordInputRef,
     confirmPasswordInputRef,
     onNext,
+    serverError,
   } = useSignUpForm();
 
   return (
@@ -258,6 +294,11 @@ export function SignUpFormForWeb() {
           passwordInputRef={passwordInputRef}
           confirmPasswordInputRef={confirmPasswordInputRef}
         />
+        {serverError && (
+          <Text className="text-red-500 dark:text-red-400 text-sm">
+            {serverError}
+          </Text>
+        )}
       </View>
       <View className="p-5">
         <Button
