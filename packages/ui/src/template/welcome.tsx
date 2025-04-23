@@ -1,6 +1,6 @@
 'use client';
 
-import { Link, Text, View } from '../system';
+import { Link, SafeAreaView, Text, View } from '../system';
 import { cn, platformStyle } from '../utils';
 
 const BUTTON_STYLE =
@@ -18,7 +18,7 @@ const TYPOGRAPHY_STYLE = `text-stone-500 dark:text-stone-300 ${platformStyle({
 
 export function AuthTemplate() {
   return (
-    <View className="flex-1 flex-col justify-center items-center bg-white dark:bg-stone-900">
+    <SafeAreaView className="flex-1 flex-col justify-center items-center bg-white dark:bg-stone-900">
       <View className="flex-1 justify-center items-center gap-y-4">
         <View className="flex-col items-center gap-y-1">
           <Text className="text-[50px] font-bold">🗞️</Text>
@@ -33,22 +33,15 @@ export function AuthTemplate() {
           </Text>
         </View>
       </View>
-      <View className="flex-col gap-y-1.5 px-4 w-full web:py-4 ios:py-12 android:py-4">
-        <Link href="/signin" testID="signin-link-button">
+      <View className="flex-col gap-y-1.5 px-4 w-full py-4 ">
+        <Link href="/news" testID="signin-link-button">
           <View className={cn(BUTTON_STYLE, 'bg-blue-500 dark:bg-blue-400')}>
             <Text className={cn(BUTTON_TEXT_STYLE, 'dark:text-stone-900')}>
-              이메일로 시작하기
-            </Text>
-          </View>
-        </Link>
-        <Link href="/signup" testID="signup-link-button">
-          <View className={cn(BUTTON_STYLE, 'bg-stone-900 dark:bg-stone-50')}>
-            <Text className={cn(BUTTON_TEXT_STYLE, 'dark:text-stone-900')}>
-              간편 회원가입
+              이메일로 계속하기
             </Text>
           </View>
         </Link>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }

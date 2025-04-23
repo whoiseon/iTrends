@@ -1,6 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { queryClient } from '@itrends/ui';
-import { HeaderBackButton, View } from '@itrends/ui';
+import { queryClient, View } from '@itrends/ui';
 import {
   DarkTheme,
   DefaultTheme,
@@ -64,32 +63,6 @@ function RootLayoutNav() {
           <View className="flex-1 bg-white dark:bg-stone-900">
             <Stack>
               <Stack.Screen name="index" options={{ headerShown: false }} />
-              <Stack.Screen
-                name="signup"
-                options={{
-                  headerShown: true,
-                  headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
-                  title: '회원가입',
-                  headerStyle: {
-                    backgroundColor:
-                      colorScheme === 'dark' ? '#1c1917' : '#fff',
-                  },
-                  headerTitleAlign: 'center',
-                }}
-              />
-              <Stack.Screen
-                name="signin"
-                options={{
-                  headerShown: true,
-                  headerLeft: () => <HeaderBackButton fallbackUrl="/" />,
-                  title: '로그인',
-                  headerStyle: {
-                    backgroundColor:
-                      colorScheme === 'dark' ? '#1c1917' : '#fff',
-                  },
-                  headerTitleAlign: 'center',
-                }}
-              />
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
             </Stack>

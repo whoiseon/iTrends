@@ -6,38 +6,26 @@
  * OpenAPI spec version: 1.0.0
  */
 import {
-  useMutation
+  useQuery
 } from '@tanstack/react-query';
 import type {
-  MutationFunction,
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
   QueryClient,
-  UseMutationOptions,
-  UseMutationResult
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
+  UseQueryOptions,
+  UseQueryResult
 } from '@tanstack/react-query';
 
 import { customInstance } from '../mutator';
-import type { ErrorType , BodyType } from '../mutator';
+import type { ErrorType } from '../mutator';
 
-export type PostAuthSignupBody = {
-  /** The email address of the user */
-  email: string;
-  /** The password of the user */
-  password: string;
-  /** The display name of the user */
-  displayName: string;
-};
-
-export type PostAuthSignup200Payload = {
-  /** Whether the user was registered successfully */
-  registered?: boolean;
-};
-
-export type PostAuthSignup200 = {
-  /** The status code of the response */
-  statusCode?: number;
-  /** The message from the server */
-  message?: string;
-  payload?: PostAuthSignup200Payload;
+export type GetApiHello200 = {
+  message: string;
+  createdAt: string;
 };
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
@@ -45,67 +33,88 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
 /**
- * Sign up for a new user
- * @summary Sign up
+ * iTrends API Version
+
+ * @summary testing
  */
-export const postAuthSignup = (
-    postAuthSignupBody: BodyType<PostAuthSignupBody>,
+export const getApiHello = (
+    
  options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
 ) => {
       
       
-      return customInstance<PostAuthSignup200>(
-      {url: `/auth/signup`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: postAuthSignupBody, signal
+      return customInstance<GetApiHello200>(
+      {url: `/api/hello`, method: 'GET', signal
     },
       options);
     }
   
 
+export const getGetApiHelloQueryKey = () => {
+    return [`/api/hello`] as const;
+    }
 
-export const getPostAuthSignupMutationOptions = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthSignup>>, TError,{data: BodyType<PostAuthSignupBody>}, TContext>, request?: SecondParameter<typeof customInstance>}
-): UseMutationOptions<Awaited<ReturnType<typeof postAuthSignup>>, TError,{data: BodyType<PostAuthSignupBody>}, TContext> => {
     
-const mutationKey = ['postAuthSignup'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
+export const getGetApiHelloQueryOptions = <TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetApiHelloQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiHello>>> = ({ signal }) => getApiHello(requestOptions, signal);
 
       
 
+      
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof postAuthSignup>>, {data: BodyType<PostAuthSignupBody>}> = (props) => {
-          const {data} = props ?? {};
+   return  { queryKey, queryFn,   refetchOnWindowFocus: false,  ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
 
-          return  postAuthSignup(data,requestOptions)
-        }
-
-        
+export type GetApiHelloQueryResult = NonNullable<Awaited<ReturnType<typeof getApiHello>>>
+export type GetApiHelloQueryError = ErrorType<unknown>
 
 
-  return  { mutationFn, ...mutationOptions }}
-
-    export type PostAuthSignupMutationResult = NonNullable<Awaited<ReturnType<typeof postAuthSignup>>>
-    export type PostAuthSignupMutationBody = BodyType<PostAuthSignupBody>
-    export type PostAuthSignupMutationError = ErrorType<unknown>
-
-    /**
- * @summary Sign up
+export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiHello>>,
+          TError,
+          Awaited<ReturnType<typeof getApiHello>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getApiHello>>,
+          TError,
+          Awaited<ReturnType<typeof getApiHello>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary testing
  */
-export const usePostAuthSignup = <TError = ErrorType<unknown>,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof postAuthSignup>>, TError,{data: BodyType<PostAuthSignupBody>}, TContext>, request?: SecondParameter<typeof customInstance>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof postAuthSignup>>,
-        TError,
-        {data: BodyType<PostAuthSignupBody>},
-        TContext
-      > => {
 
-      const mutationOptions = getPostAuthSignupMutationOptions(options);
+export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-      return useMutation(mutationOptions , queryClient);
-    }
+  const queryOptions = getGetApiHelloQueryOptions(options)
+
+  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}

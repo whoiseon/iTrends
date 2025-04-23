@@ -17,8 +17,6 @@
   "dependencies": {
     "@itrends/ui": "*",
     "@prisma/client": "^6.6.0",
-    "@supabase/ssr": "^0.6.1",
-    "@supabase/supabase-js": "^2.49.4",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^5.74.4",
     "@tanstack/react-query-devtools": "^5.74.4",
@@ -30,9 +28,9 @@
     "swagger-ui-react": "^5.21.0"
   },
   "devDependencies": {
+    "@itrends/api": "*",
     "@itrends/eslint-config": "*",
     "@itrends/typescript-config": "*",
-    "@itrends/api": "*",
     "@types/node": "^22.14.0",
     "@types/react": "~18.3.12",
     "@types/react-dom": "~18.3.1",

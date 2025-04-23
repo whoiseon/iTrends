@@ -1,7 +1,7 @@
 import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
 
 export const AXIOS_INSTANCE = Axios.create({
-  baseURL: 'http://localhost:3060/api',
+  baseURL: 'http://localhost:3060',
 });
 
 export const customInstance = <T>(
