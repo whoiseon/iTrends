@@ -20,7 +20,6 @@ export default defineConfig({
           },
         },
       },
-      client: 'react-query',
       target: './__generated__/api.generated.ts',
     },
   },

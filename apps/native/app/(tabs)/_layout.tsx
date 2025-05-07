@@ -1,49 +1,59 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 import React from 'react';
-import { Pressable, useColorScheme } from 'react-native';
+import { Pressable } from 'react-native';
 
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import Colors from '@/constants/Colors';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={26} style={{ marginBottom: -3 }} {...props} />;
-}
+import { useLayoutColors } from '@/hooks/useLayoutColors';
+import {
+  cn,
+  getAskTabIconOptions,
+  getCommentsTabIconOptions,
+  getMyPageTabIconOptions,
+  getNewsTabIconOptions,
+  Icon,
+  TAB_BAR_ICON_SIZE,
+} from '@itrends/ui';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const colors = useLayoutColors();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        sceneStyle: {
+          backgroundColor: colors.bg,
+        },
+        tabBarActiveTintColor: colors.tint,
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
-        animation: 'shift',
+        tabBarStyle: {
+          backgroundColor: colors.bg,
+          borderTopColor: colors.border,
+        },
         headerStyle: {
-          backgroundColor: colorScheme === 'dark' ? '#1c1917' : '#fff',
+          backgroundColor: colors.bg,
         },
       }}
     >
       <Tabs.Screen
         name="news"
         options={{
-          title: 'News',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          title: getNewsTabIconOptions().title,
+          tabBarIcon: ({ color, focused }) =>
+            getNewsTabIconOptions().tabBarIcon({
+              size: TAB_BAR_ICON_SIZE,
+              color: focused ? colors.tint : color,
+            }),
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                  <Icon
+                    name="Bell"
+                    size={20}
+                    color={colors.bg_reverse}
+                    className={cn('mr-4', pressed && 'opacity-70')}
                   />
                 )}
               </Pressable>
@@ -54,26 +64,34 @@ export default function TabLayout() {
       <Tabs.Screen
         name="comments"
         options={{
-          title: 'Comments',
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="comments" color={color} />
-          ),
+          title: getCommentsTabIconOptions().title,
+          tabBarIcon: ({ color, focused }) =>
+            getCommentsTabIconOptions().tabBarIcon({
+              size: TAB_BAR_ICON_SIZE,
+              color: focused ? colors.tint : color,
+            }),
         }}
       />
       <Tabs.Screen
         name="ask"
         options={{
-          title: 'Ask',
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="question" color={color} />
-          ),
+          title: getAskTabIconOptions().title,
+          tabBarIcon: ({ color, focused }) =>
+            getAskTabIconOptions().tabBarIcon({
+              size: TAB_BAR_ICON_SIZE,
+              color: focused ? colors.tint : color,
+            }),
         }}
       />
       <Tabs.Screen
         name="myPage"
         options={{
-          title: 'My Page',
-          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+          title: getMyPageTabIconOptions().title,
+          tabBarIcon: ({ color, focused }) =>
+            getMyPageTabIconOptions().tabBarIcon({
+              size: TAB_BAR_ICON_SIZE,
+              color: focused ? colors.tint : color,
+            }),
         }}
       />
     </Tabs>

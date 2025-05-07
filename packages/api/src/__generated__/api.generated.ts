@@ -5,23 +5,7 @@
  * [openapi.json](/api/swagger)
  * OpenAPI spec version: 1.0.0
  */
-import {
-  useQuery
-} from '@tanstack/react-query';
-import type {
-  DataTag,
-  DefinedInitialDataOptions,
-  DefinedUseQueryResult,
-  QueryClient,
-  QueryFunction,
-  QueryKey,
-  UndefinedInitialDataOptions,
-  UseQueryOptions,
-  UseQueryResult
-} from '@tanstack/react-query';
-
 import { customInstance } from '../mutator';
-import type { ErrorType } from '../mutator';
 
 export type GetApiHello200 = {
   message: string;
@@ -31,90 +15,18 @@ export type GetApiHello200 = {
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
-
-/**
+  /**
  * iTrends API Version
 
  * @summary testing
  */
 export const getApiHello = (
     
- options?: SecondParameter<typeof customInstance>,signal?: AbortSignal
-) => {
-      
-      
+ options?: SecondParameter<typeof customInstance>,) => {
       return customInstance<GetApiHello200>(
-      {url: `/api/hello`, method: 'GET', signal
+      {url: `/api/hello`, method: 'GET'
     },
       options);
     }
   
-
-export const getGetApiHelloQueryKey = () => {
-    return [`/api/hello`] as const;
-    }
-
-    
-export const getGetApiHelloQueryOptions = <TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
-) => {
-
-const {query: queryOptions, request: requestOptions} = options ?? {};
-
-  const queryKey =  queryOptions?.queryKey ?? getGetApiHelloQueryKey();
-
-  
-
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof getApiHello>>> = ({ signal }) => getApiHello(requestOptions, signal);
-
-      
-
-      
-
-   return  { queryKey, queryFn,   refetchOnWindowFocus: false,  ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
-}
-
-export type GetApiHelloQueryResult = NonNullable<Awaited<ReturnType<typeof getApiHello>>>
-export type GetApiHelloQueryError = ErrorType<unknown>
-
-
-export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
-  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>> & Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiHello>>,
-          TError,
-          Awaited<ReturnType<typeof getApiHello>>
-        > , 'initialData'
-      >, request?: SecondParameter<typeof customInstance>}
- , queryClient?: QueryClient
-  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>> & Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof getApiHello>>,
-          TError,
-          Awaited<ReturnType<typeof getApiHello>>
-        > , 'initialData'
-      >, request?: SecondParameter<typeof customInstance>}
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
- , queryClient?: QueryClient
-  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-/**
- * @summary testing
- */
-
-export function useGetApiHello<TData = Awaited<ReturnType<typeof getApiHello>>, TError = ErrorType<unknown>>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getApiHello>>, TError, TData>>, request?: SecondParameter<typeof customInstance>}
- , queryClient?: QueryClient 
- ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-
-  const queryOptions = getGetApiHelloQueryOptions(options)
-
-  const query = useQuery(queryOptions , queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-
-  query.queryKey = queryOptions.queryKey ;
-
-  return query;
-}
+export type GetApiHelloResult = NonNullable<Awaited<ReturnType<typeof getApiHello>>>

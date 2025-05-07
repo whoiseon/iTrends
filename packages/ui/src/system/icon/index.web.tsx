@@ -4,5 +4,5 @@ import { IconProps } from './shared';
 
 export const Icon = ({ name, ...props }: IconProps) => {
   const IconComponent = LucideReact[name];
-  return <IconComponent {...props} />;
+  return <IconComponent {...props} strokeWidth={1.5} />;
 };

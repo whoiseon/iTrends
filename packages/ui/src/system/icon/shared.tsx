@@ -1,7 +1,11 @@
 // using icons
 const ICONS = [
-  'Camera',
+  'Bell',
   'ChevronLeft',
+  'Home',
+  'MessageCircle',
+  'MessageCircleQuestion',
+  'UserRound',
   // ...add more icons
 ] as const;
 
@@ -14,4 +18,5 @@ export type IconProps = {
   stroke?: string;
   strokeWidth?: number;
   className?: string;
+  opacity?: number;
 };

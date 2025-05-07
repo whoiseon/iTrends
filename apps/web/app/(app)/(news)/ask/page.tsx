@@ -4,7 +4,7 @@ export default function NewsPage() {
   return (
     <>
       <ClientBoundary />
-      <div>123</div>
+      <div>Ask</div>
     </>
   );
 }
