@@ -22,9 +22,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.itrends",
-      "buildToolsVersion": "36.0.0",
-      "ndkVersion": "29.0.13113456"
+      "package": "com.itrends"
     },
     "web": {
       "bundler": "metro",

@@ -1,37 +1,35 @@
+import {
+  getApiNotifications,
+  GetApiNotifications200PayloadItem,
+} from '@itrends/api';
+import { NotificationTemplate } from '@itrends/ui';
+import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
-
-import { Text, View } from '@/components/Themed';
+import React, { useEffect, useState } from 'react';
+import { Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ModalScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
+  const [data, setData] = useState<GetApiNotifications200PayloadItem[]>([]);
 
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
+  useEffect(function getNotificationList() {
+    (async () => {
+      try {
+        const list = await getApiNotifications();
+        setData(list.payload);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  return (
+    <>
+      <Stack.Screen options={{ title: 'Notification' }} />
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-    </View>
+      <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+        <NotificationTemplate data={data} />
+      </SafeAreaView>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

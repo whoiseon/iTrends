@@ -12,6 +12,17 @@ export type GetApiHello200 = {
   createdAt: string;
 };
 
+export type GetApiNotifications200PayloadItem = {
+  title?: string;
+  date?: string;
+};
+
+export type GetApiNotifications200 = {
+  statusCode: number;
+  message: string;
+  payload: GetApiNotifications200PayloadItem[];
+};
+
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
@@ -29,4 +40,19 @@ export const getApiHello = (
       options);
     }
   
+/**
+ * recent notification list
+
+ * @summary config
+ */
+export const getApiNotifications = (
+    
+ options?: SecondParameter<typeof customInstance>,) => {
+      return customInstance<GetApiNotifications200>(
+      {url: `/api/notifications`, method: 'GET'
+    },
+      options);
+    }
+  
 export type GetApiHelloResult = NonNullable<Awaited<ReturnType<typeof getApiHello>>>
+export type GetApiNotificationsResult = NonNullable<Awaited<ReturnType<typeof getApiNotifications>>>

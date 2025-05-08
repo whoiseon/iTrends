@@ -38,6 +38,50 @@
           }
         }
       }
+    },
+    "/api/notifications": {
+      "get": {
+        "tags": ["config"],
+        "summary": "config",
+        "description": "recent notification list\n",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "statusCode": {
+                      "type": "number",
+                      "default": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": ""
+                    },
+                    "payload": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "date": {
+                            "type": "string"
+                          }
+                        },
+                      }
+                    }
+                  },
+                  "required": ["payload", "message", "statusCode"]
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {

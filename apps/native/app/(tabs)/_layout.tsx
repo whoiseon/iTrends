@@ -1,9 +1,3 @@
-import { Link, Tabs } from 'expo-router';
-import React from 'react';
-import { Pressable } from 'react-native';
-
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import { useLayoutColors } from '@/hooks/useLayoutColors';
 import {
   cn,
   getAskTabIconOptions,
@@ -13,6 +7,12 @@ import {
   Icon,
   TAB_BAR_ICON_SIZE,
 } from '@itrends/ui';
+import { Link, Tabs } from 'expo-router';
+import React from 'react';
+import { Pressable } from 'react-native';
+
+import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import { useLayoutColors } from '@/hooks/useLayoutColors';
 
 export default function TabLayout() {
   const colors = useLayoutColors();

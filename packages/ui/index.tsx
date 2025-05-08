@@ -6,6 +6,8 @@ export * from './src/config/constant';
 export * from './src/block/appHeader/index';
 export * from './src/block/appHeader/shared';
 export * from './src/block/bottomNavigation.web';
+export * from './src/block/windowing/index';
+export * from './src/block/windowing/shared';
 
 // system
 export * from './src/system/button';
@@ -17,6 +19,7 @@ export * from './src/system/view';
 
 // template
 export * from './src/template/welcome';
+export * from './src/template/notificationList';
 
 // utils
 export * from './src/utils';

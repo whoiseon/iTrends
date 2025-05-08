@@ -24,7 +24,6 @@ export function BottomNavigation() {
 
   return (
     <View className="fixed flex-row bottom-0 left-0 right-0 border-t-[1px] border-t-stone-300 dark:border-t-stone-800 bg-white dark:bg-stone-900 h-[56px] px-3 items-center justify-between">
-      fwe \
       {TAB_LIST.map(({ tabBarIcon, title, href, activation }) => {
         const isActiveLink = activation?.(firstSegment ?? '');
 

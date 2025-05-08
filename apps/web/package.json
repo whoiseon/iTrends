@@ -17,6 +17,7 @@
   "dependencies": {
     "@itrends/ui": "*",
     "@svgr/webpack": "^8.1.0",
+    "@tanstack/react-virtual": "^3.13.8",
     "@types/swagger-ui-react": "^5.18.0",
     "next": "^15.2.4",
     "react": "18.3.1",
